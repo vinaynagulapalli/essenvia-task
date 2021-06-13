@@ -1,0 +1,76 @@
+<form [formGroup]="countryCapitalForm" (ngSubmit)="saveCountryCapital()">
+    <div class="content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"> Country</th>
+                    <th scope="col"> Capital</th>
+                </tr>
+            </thead>
+
+            <tbody formArrayName="countryCapital" id="body">
+
+                <tr *ngFor="let capCountry of countryCapitalForm.get('countryCapital')['controls']; let capitalCountry = index"
+                    [formGroupName]="capitalCountry" context="context1"
+                    (contextmenu)="onRightClick($event ,capitalCountry)">
+                    <!-- Country Column -->
+                    <td scope="row">
+                        <div class="dropdown">
+                            <input type="text" formControlName="country" id="inputCountry" style="border: unset;"
+                                placeholder="Enter country "
+                                (input)="countryValue($event.target.value ,capitalCountry )" class="inp-control">
+                            <ul *ngIf="capCountry.controls.countryDropDown.value" class="dropdown-content">
+                                <li *ngFor="let counCap of countryCapitals" id="list-country" class="p-2 mb-2"
+                                    (click)="setCountryDetails(counCap.country ,capitalCountry)">{{counCap.country}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="error-view">
+                            <div class="fs-11 fw-4">
+                                <span *ngIf="capCountry?.controls.country.errors?.required && isSubmitted"
+                                    class="float-left error-msg-txt">
+                                    Please Enter Country
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <!-- Capital column -->
+
+                    <td scope="row">
+                        <div class="dropdown">
+                            <input type="text" formControlName="capital" style="border: unset;"
+                                placeholder="Enter Capital"
+                                (input)="capitalValue($event.target.value ,capitalCountry) ">
+                            <ul *ngIf="capCountry.controls.capitalDropDown.value" class="dropdown-content">
+                                <li *ngFor="let counCap of countryCapitals" class="p-2 mb-2"
+                                    (click)="setCapitalDetails(counCap.city ,capitalCountry)">{{counCap.city}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="error-view">
+                            <div class="fs-11 fw-4">
+                                <span *ngIf="capCountry?.controls.capital.errors?.required && isSubmitted"
+                                    class="float-left error-msg-txt">
+                                    Please Enter Capital
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <div *ngIf="contextmenu">
+                        <ul id="dropDown" class="contextmenu"
+                            [ngStyle]="{'left.px': contextmenuX, 'top.px': contextmenuY}">
+                            <li><a (click)="addRowBelow()">Add Row Below</a></li>
+                            <li><a (click)="addRowAbove()"> Add Row Above</a></li>
+                            <li *ngIf="selectedIndex > 0"><a (click)="removeRow()"> Remove Row</a></li>
+                        </ul>
+                    </div>
+                </tr>
+
+            </tbody>
+            <div class="footer">
+                <button type="submit" class="save-btn">Submit</button>
+            </div>
+        </table>
+    </div>
+</form>

@@ -1,0 +1,60 @@
+.content {
+    .table {
+        width: 600px;
+        border: 1px solid lightgray;
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #212529;
+        }
+
+        .dropdown-content {
+            display: block;
+            height: 200px;
+            overflow-x: hidden;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 12px 16px;
+            z-index: 1;
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .contextmenu {
+            position: absolute;
+            border: 1px solid gray;
+            padding: 10px;
+            background-color: white;
+            z-index: 2;
+            list-style: none;
+            li :hover {
+                cursor: pointer;
+                background-color: lightgray;
+            }
+        }
+        .error-view {
+            height: 18px;
+            margin-top: 4px;
+            font-size: 12px;
+
+            .error-msg-txt {
+                color: red !important;
+            }
+        }
+    }
+    .footer {
+        float: right;
+        margin-top: 40px;
+        .save-btn {
+            border: black;
+            height: 40px;
+            width: 80px;
+            border-radius: 20%;
+            background: lightblue;
+            margin-bottom: 20px;
+        }
+    }
+}
